@@ -11,7 +11,7 @@
 
 
 struct {
-	ArrayOfPoint sorted_points;
+	ArrayOfPoint sortedPoints;
 	int length;
 }typedef Route;
 
@@ -19,9 +19,52 @@ struct {
 struct {
 	Route* items;
 	int size;
-
-
 }typedef Generation;
+
+
+Route createRandomRoute(ArrayOfPoint points) {
+	Route newRoute; 
+	int* randomed = createRandomInts(points.capacity);
+	newRoute.sortedPoints.points = malloc(points.length);
+	newRoute.sortedPoints.length = points.length;
+	newRoute.sortedPoints.capacity = points.capacity;
+	for (int i = 0; i < points.capacity; i++)
+	{
+		newRoute.sortedPoints.points[i] = getPoint(points, randomed[i]);
+	}
+	free(randomed);
+	newRoute.length = calculateDistanceForRoute(newRoute(newRoute.sortedPoints));
+	return newRoute;
+}
+
+
+
+
+
+int* createRandomInts(int max) {
+	int* arr = malloc(sizeof(int) * (max));
+	int random = rand() % (max);
+	int count = 0;
+	int wasAlready = 1;
+	for (int i = 0; i < max; i++) {
+		while (wasAlready == 1) {
+			wasAlready = 0;
+			random = rand() % (max);
+			for (int j = 0; j < count; j++) {
+				if (arr[j] == random) {
+					wasAlready = 1;
+				}
+			}
+		}
+		arr[i] = random;
+		count++;
+		wasAlready = 1;
+	}
+	return arr;
+
+}
+
+
 
 
 HDC HSCREEN;
@@ -42,10 +85,10 @@ BOOL drawLine(Point a, Point b) {
 }
 
 
-int CalculateDistanceForRoute(ArrayOfPoint sorted_points) { //squared
+int calculateDistanceForRoute(ArrayOfPoint sortedPoints) { //squared
 	int sum = 0;
-	for (int i = 0; i < sorted_points.capacity - 1; i++) {
-		sum += CalculateDistanceSquared(GetPoint(sorted_points, i), GetPoint(sorted_points, i + 1));
+	for (int i = 0; i < sortedPoints.capacity - 1; i++) {
+		sum += calculateDistanceSquared(getPoint(sortedPoints, i), getPoint(sortedPoints, i + 1));
 	}
 	return sum;
 }
@@ -60,15 +103,15 @@ int main() {
 	Points.points = malloc(NumOfPoints * sizeof(Point));
 	Points.capacity = NumOfPoints;
 	Points.length = NumOfPoints * sizeof(Point);
-	SetPoints(Points);
+	setPoints(Points);
 
 	for (;;) {
 		for (int i = 0; i < Points.capacity; i++) {
-			BOOL success = drawPoint(GetPoint(Points, i));  // needs to be error hand
+			BOOL success = drawPoint(getPoint(Points, i));  // needs to be error hand
 
 		}
 		for (int i = 0; i < Points.capacity - 1; i++) {
-			BOOL success = drawLine(GetPoint(Points, i), GetPoint(Points, i + 1)); // needs to be error hand
+			BOOL success = drawLine(getPoint(Points, i), getPoint(Points, i + 1)); // needs to be error hand
 		}
 		//Sleep(1);
 	}
