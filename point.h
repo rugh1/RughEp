@@ -14,9 +14,9 @@ typedef struct {
 } ArrayOfPoint;
 
 
-Point GetPoint(ArrayOfPoint array, int index);
-BOOL SetPoints(ArrayOfPoint array);
-int CalculateDistanceSquared(Point a, Point b);
-int CalculateDistanceForRoute(ArrayOfPoint sorted_points);
+Point getPoint(ArrayOfPoint array, int index);
+BOOL setPoints(ArrayOfPoint array);
+int calculateDistanceSquared(Point a, Point b);
+int calculateDistanceForRoute(ArrayOfPoint sorted_points);
 
 #endif // POINT_H

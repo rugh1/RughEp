@@ -5,7 +5,7 @@
 #define Y_SCREEN_LIMIT (1080 - 200)
 #define DRAWING_RADIUS 10
 
-Point GetPoint(ArrayOfPoint array, int index) {
+Point getPoint(ArrayOfPoint array, int index) {
     if (index < array.capacity && index >= 0) {
         return array.points[index];
     }
@@ -13,7 +13,7 @@ Point GetPoint(ArrayOfPoint array, int index) {
     return default_point;
 }
 
-BOOL SetPoints(ArrayOfPoint array) {
+BOOL setPoints(ArrayOfPoint array) {
     int x, y;
     for (int i = 0; i < array.capacity; i++) {
         x = DRAWING_RADIUS * 3 + rand() % X_SCREEN_LIMIT;
@@ -24,7 +24,7 @@ BOOL SetPoints(ArrayOfPoint array) {
     return TRUE;
 }
 
-int CalculateDistanceSquared(Point a, Point b) {
+int calculateDistanceSquared(Point a, Point b) {
     return (abs(a.x - b.x) << 1) + (abs(a.y - b.y) << 1);
 }
 
