@@ -5,6 +5,8 @@ struct {
 	int length;
 }typedef Route;
 
+
+
 void createRandomInts(int* buffer, int max);
 Route createRandomRoute(ArrayOfPoint points);
 void printRoute(Route route);

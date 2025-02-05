@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <math.h>
 
+
 void createRandomInts(int* buffer, int max) {
 	int random = rand() % (max);
 	int count = 0;
@@ -28,9 +29,9 @@ void createRandomInts(int* buffer, int max) {
 
 Route createRandomRoute(ArrayOfPoint points) {
 	Route newRoute;
-	int* randomed = malloc(sizeof(int) * points.capacity);
+	int* randomed = (int*)malloc(sizeof(int) * points.capacity);
 	createRandomInts(randomed, points.capacity);
-	newRoute.sortedPoints.points = malloc(points.length);
+	newRoute.sortedPoints.points = (Point*)malloc(points.length);
 	newRoute.sortedPoints.length = points.length;
 	newRoute.sortedPoints.capacity = points.capacity;
 	for (int i = 0; i < points.capacity; i++)
