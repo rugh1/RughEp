@@ -43,6 +43,25 @@ Route createRandomRoute(ArrayOfPoint points) {
 	return newRoute;
 }
 
+
+Route mutateRoute(Route route) { // still needs testing
+	Route newRoute;
+	newRoute.length = route.length;
+	newRoute.sortedPoints.points = (Point*)malloc(route.sortedPoints.length);
+	newRoute.sortedPoints.length = route.sortedPoints.length;
+	newRoute.sortedPoints.capacity = route.sortedPoints.capacity;
+	for (int i = 0; i < route.length; i++)
+	{
+		newRoute.sortedPoints.points[i] = getPoint(route.sortedPoints, i);
+	}
+	int a = rand() % (route.length);
+	int b = rand() % (route.length);
+	Point tmp = getPoint(newRoute.sortedPoints, a);
+	
+
+	return newRoute;
+}
+
 void printRoute(Route route) {
 	for (int i = 0; i < route.sortedPoints.capacity; i++) {
 		printf("(%i,%i) ", getPoint(route.sortedPoints, i).x, getPoint(route.sortedPoints, i).y);

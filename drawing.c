@@ -6,8 +6,12 @@
 #include <windows.h>
 
 
+#ifndef DRAWING_RADIUS 
 #define DRAWING_RADIUS 10
+#endif // DRAWIN_RADUIS 
 #define corners(point) point.x - DRAWING_RADIUS, point.y + DRAWING_RADIUS, point.x + DRAWING_RADIUS, point.y - DRAWING_RADIUS
+#define DRAWING_DELAY 10
+
 
 void drawPoint(Point point, HDC Hscreen) {
     Ellipse(Hscreen, corners(point));

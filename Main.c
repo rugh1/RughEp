@@ -18,13 +18,18 @@
 
 HDC HSCREEN;
 
-
+//todo:
+//add get and sets to everything (should done it at start but still)
+//check mutation
+//add window to show everything much nicer
+//add text
+//add cross
 
 
 
 int main() {
     srand(time(NULL)); // use current time as seed for random generator
-    int NumOfPoints = 10;
+    int NumOfPoints = 7;
     HSCREEN = GetDC(NULL);
     ArrayOfPoint points;
     points.points = (Point*)malloc(NumOfPoints * sizeof(Point));
@@ -32,12 +37,14 @@ int main() {
     points.length = NumOfPoints * sizeof(Point);
     setPoint(points);
     Generation gen = createNewGeneration(points, 1000);
-    for (;;) {
+    for (int i = 0; i < 5040; i++) {
         printRoute(gen.routes[0]);
         drawRoute(gen.routes[0], HSCREEN);
-        
-        freeGeneration(gen);
-
+        Generation tmp = createGenerationFromGen(points, 1000, gen, 10);
+        freeGenerationNext(gen, 10);
+        gen = tmp;
     }
+    freeGeneration(gen);
     free(points.points);
+    return 0;
 }
